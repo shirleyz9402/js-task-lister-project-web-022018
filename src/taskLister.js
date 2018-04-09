@@ -7,7 +7,7 @@ class TaskLister {
   }
   // your solution here
   render() {
-    return (`<div id="app-content">
+    return (`
     <form id="create-task-form">
       <label for="parent-list">Select List:</label>
       <select id="parent-list">
@@ -21,7 +21,6 @@ class TaskLister {
       <input type="text" id="new-task-priority" placeholder="priority">
       <input type="submit" value="Create New Task">
     </form>
-  </div>
   <div id="lists">
   ${this.renderLists()}
   </div>`);
@@ -31,5 +30,20 @@ class TaskLister {
   }
   listOptions(){
     return this.lists.map( list => `<option value=${list.id}>${list.title}</option>`)
+  }
+  deleteList(e){
+    let list = this.lists.find(list => e.target.dataset.id == list.id)
+    this.lists = this.lists.filter(newList => newList.id != list.id)
+  }
+  deleteTask(e){
+    let list = this.lists.find(list => e.target.dataset.listid == list.id)
+    let task = list.tasks.find(task => e.target.dataset.id == task.id)
+    list.tasks = list.tasks.filter(newTask => newTask.id != task.id)
+  }
+  addList(event){
+
+  }
+  addTask(event){
+
   }
 }
