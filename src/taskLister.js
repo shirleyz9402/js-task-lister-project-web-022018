@@ -1,6 +1,35 @@
 class TaskLister {
+  constructor(){
+    this.lists = []
+    this.activeList = null
+    this.currentDescription = null
+    this.currentPriority = null
+  }
   // your solution here
   render() {
-    return (`<h1>Welcome to Flavortown</h1>`);
+    return (`<div id="app-content">
+    <form id="create-task-form">
+      <label for="parent-list">Select List:</label>
+      <select id="parent-list">
+      ${this.listOptions()}
+      </select>
+
+      <label for="new-task-description">Task description:</label>
+      <input required type="text" id="new-task-description" placeholder="description">
+
+      <label for="new-task-priority">Priority level:</label>
+      <input type="text" id="new-task-priority" placeholder="priority">
+      <input type="submit" value="Create New Task">
+    </form>
+  </div>
+  <div id="lists">
+  ${this.renderLists()}
+  </div>`);
+}
+  renderLists(){
+  return this.lists.map(list => list.render()).join("")
+  }
+  listOptions(){
+    return this.lists.map( list => `<option value=${list.id}>${list.title}</option>`)
   }
 }
